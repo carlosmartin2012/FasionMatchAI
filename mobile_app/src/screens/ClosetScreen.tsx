@@ -1,19 +1,29 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { View, Text, StyleSheet, FlatList, ScrollView, TouchableOpacity } from 'react-native';
 import { useWardrobeStore } from '../store/wardrobeStore';
+import { useAuthStore } from '../store/authStore';
 import WardrobeItemCard from '../components/WardrobeItemCard';
+import ItemDetailModal from '../components/ItemDetailModal';
+import { WardrobeItem } from '../types';
 
 const CATEGORIES = ['VIEW ALL', 'TOPS', 'BOTTOMS', 'OUTERWEAR', 'SHOES', 'ACCESSORIES'];
 
 export default function ClosetScreen() {
-    const items = useWardrobeStore((state) => state.items);
+    const { items, fetchItems, isLoading } = useWardrobeStore();
+    const { user } = useAuthStore();
     const [activeCategory, setActiveCategory] = useState('VIEW ALL');
+    const [selectedItem, setSelectedItem] = useState<WardrobeItem | null>(null);
+
+    useEffect(() => {
+        if (user) {
+            fetchItems(user.id);
+        }
+    }, [user]);
 
     const filteredItems = useMemo(() => {
         if (activeCategory === 'VIEW ALL') return items;
         return items.filter(item => {
             const cat = item.category.toUpperCase();
-            // Simple inclusive matching like in web
             return cat.includes(activeCategory.slice(0, -1));
         });
     }, [items, activeCategory]);
@@ -48,10 +58,12 @@ export default function ClosetScreen() {
                 numColumns={2}
                 contentContainerStyle={styles.listContent}
                 columnWrapperStyle={styles.columnWrapper}
+                onRefresh={() => user && fetchItems(user.id)}
+                refreshing={isLoading}
                 renderItem={({ item }) => (
                     <WardrobeItemCard
                         item={item}
-                        onPress={() => console.log('Selected:', item.id)}
+                        onPress={() => setSelectedItem(item)}
                     />
                 )}
                 ListEmptyComponent={
@@ -59,6 +71,11 @@ export default function ClosetScreen() {
                         <Text style={styles.emptyText}>No items found.</Text>
                     </View>
                 }
+            />
+
+            <ItemDetailModal
+                item={selectedItem}
+                onClose={() => setSelectedItem(null)}
             />
         </View>
     );

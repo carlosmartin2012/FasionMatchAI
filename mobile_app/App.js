@@ -4,6 +4,7 @@ import { Provider as PaperProvider } from 'react-native-paper';
 import MainNavigation from './src/navigation/MainNavigation';
 import { StatusBar } from 'expo-status-bar';
 
+// Restore full App component logic
 export default function App() {
   return (
     <SafeAreaProvider>
