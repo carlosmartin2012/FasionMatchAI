@@ -11,8 +11,11 @@ import {
 } from 'react-native';
 import { Send } from 'lucide-react-native';
 import { ChatMessage } from '../types';
+import { getStylistAdvice } from '../services/gemini';
+import { useWardrobeStore } from '../store/wardrobeStore';
 
 export default function StylistScreen() {
+    const { items: wardrobe } = useWardrobeStore();
     const [messages, setMessages] = useState<ChatMessage[]>([
         {
             id: '1',
@@ -22,10 +25,11 @@ export default function StylistScreen() {
         }
     ]);
     const [input, setInput] = useState('');
+    const [isTyping, setIsTyping] = useState(false);
     const flatListRef = useRef<FlatList>(null);
 
-    const handleSend = () => {
-        if (!input.trim()) return;
+    const handleSend = async () => {
+        if (!input.trim() || isTyping) return;
 
         const userMsg: ChatMessage = {
             id: Date.now().toString(),
@@ -34,19 +38,36 @@ export default function StylistScreen() {
             timestamp: Date.now()
         };
 
-        setMessages(prev => [...prev, userMsg]);
+        const updatedMessages = [...messages, userMsg];
+        setMessages(updatedMessages);
         setInput('');
+        setIsTyping(true);
 
-        // Simulate AI response
-        setTimeout(() => {
+        try {
+            const advice = await getStylistAdvice(
+                updatedMessages.map(m => ({ role: m.role, text: m.text })),
+                wardrobe
+            );
+
             const modelMsg: ChatMessage = {
                 id: (Date.now() + 1).toString(),
                 role: 'model',
-                text: "That sounds like a great plan! Given your style, I'd suggest pairing your White Basic Tee with the Beige Chinos for a classic, effortless look.",
+                text: advice,
                 timestamp: Date.now()
             };
             setMessages(prev => [...prev, modelMsg]);
-        }, 1000);
+        } catch (error) {
+            console.error("Stylist advice error:", error);
+            const errorMsg: ChatMessage = {
+                id: Date.now().toString(),
+                role: 'model',
+                text: "I'm sorry, I'm having trouble connecting to my fashion brain. Please try again later.",
+                timestamp: Date.now()
+            };
+            setMessages(prev => [...prev, errorMsg]);
+        } finally {
+            setIsTyping(false);
+        }
     };
 
     useEffect(() => {
@@ -84,6 +105,11 @@ export default function StylistScreen() {
                         </View>
                     </View>
                 )}
+                ListFooterComponent={isTyping ? (
+                    <View style={styles.typingContainer}>
+                        <Text style={styles.typingText}>Stylist is thinking...</Text>
+                    </View>
+                ) : null}
             />
 
             <View style={styles.inputContainer}>
@@ -98,6 +124,7 @@ export default function StylistScreen() {
                     onPress={handleSend}
                     style={styles.sendButton}
                     activeOpacity={0.8}
+                    disabled={isTyping}
                 >
                     <Send color="#fff" size={20} />
                 </TouchableOpacity>
@@ -110,8 +137,8 @@ const styles = StyleSheet.create({
     container: { flex: 1, backgroundColor: '#fff' },
     messageList: { padding: 20, gap: 16 },
     messageWrapper: { flexDirection: 'row', width: '100%' },
-    userMessageWrapper: { justifyContent: 'end' },
-    modelMessageWrapper: { justifyContent: 'start' },
+    userMessageWrapper: { justifyContent: 'flex-end' },
+    modelMessageWrapper: { justifyContent: 'flex-start' },
     messageBubble: {
         maxWidth: '80%',
         paddingHorizontal: 16,
@@ -155,4 +182,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    typingContainer: {
+        paddingHorizontal: 20,
+        paddingBottom: 10,
+    },
+    typingText: {
+        fontSize: 12,
+        fontStyle: 'italic',
+        color: '#9ca3af',
+    }
 });

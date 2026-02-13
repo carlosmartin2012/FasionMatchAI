@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
-import { Square, MessageCircle, Compass, User } from 'lucide-react-native';
+import { Square, MessageCircle, PlusSquare, Compass, User } from 'lucide-react-native';
 import { supabase } from '../services/supabase';
 import { useAuthStore } from '../store/authStore';
 
 // Screens
 import ClosetScreen from '../screens/ClosetScreen';
 import StylistScreen from '../screens/StylistScreen';
+import UploadScreen from '../screens/UploadScreen';
 import DiscoverScreen from '../screens/DiscoverScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import AuthScreen from '../screens/AuthScreen';
@@ -29,7 +30,7 @@ export default function MainNavigation() {
         });
 
         return () => subscription.unsubscribe();
-    }, []);
+    }, [setSession]);
 
     if (isLoading) {
         return null; // Or a loading spinner
@@ -59,6 +60,14 @@ export default function MainNavigation() {
                         component={StylistScreen}
                         options={{
                             tabBarIcon: ({ color }) => <MessageCircle color={color} size={24} />
+                        }}
+                    />
+                    <Tab.Screen
+                        name="Digitize"
+                        component={UploadScreen}
+                        options={{
+                            tabBarIcon: ({ color }) => <PlusSquare color={color} size={24} />,
+                            headerTitle: 'Digitize Item'
                         }}
                     />
                     <Tab.Screen
