@@ -1,0 +1,172 @@
+---
+sprint_planning___code_analysis_and_architecture_assessment:
+  description: "**SPRINT 0 - ASSESSMENT TECNICO COMPLETO**. Analizar el codigo actual
+    de FashionMatch AI (GitHub: https://github.com/carlosmartin2012/FasionMatchAI)
+    y crear workstreams detallados para migracion de React web a React Native. **DELIVERABLES**:
+    1) Analisis tecnico del codigo TypeScript/React actual, 2) Assessment de componentes
+    reutilizables para mobile, 3) Plan de migracion con estimacion de sprints, 4)
+    Identificacion de dependencias criticas y riesgos tecnicos, 5) Backlog priorizado
+    para 6 sprints iniciales, 6) Definition of Done para cada workstream, 7) Setup
+    de entorno de desarrollo y CI/CD pipeline."
+  expected_output: 'Documento tecnico completo con: Architecture Assessment del codigo
+    actual, plan de migracion React → React Native sprint por sprint, backlog priorizado
+    con user stories tecnicas, estimaciones de esfuerzo por componente, setup de development
+    environment, y roadmap de 6 sprints con milestones claros para cada desarrollador.'
+  agent: emilio___pmo_y_technical_program_manager
+backend_infrastructure___supabase_setup_and_retailers_api_integration:
+  description: "**WORKSTREAM BACKEND - INFRAESTRUCTURA CORE**. Configurar y optimizar
+    infraestructura backend usando Supabase para soportar MVP y escalado a 2,500+
+    usuarios. **EPICS**: 1) Setup Supabase con schema de BD optimizado para armario
+    digital, 2) Implementar autenticacion y sistema de usuarios, 3) Integracion APIs
+    de retailers (Zara, H&M, Mango, ASOS) para catalogo unificado, 4) Sistema de suscripciones
+    con Stripe para modelo Gold, 5) APIs para subida y analisis de imagenes de prendas,
+    6) Backend para Daily Picks y recomendaciones IA, 7) Sistema de notificaciones
+    push, 8) Monitoring y logging para production."
+  expected_output: 'Sistema backend completo funcionando con: Supabase configurado
+    y optimizado, APIs de retailers integradas, sistema de suscripciones operativo,
+    endpoints para mobile app funcionando, sistema de autenticacion robusto, y infrastructure
+    monitoring configurado. Documentacion tecnica de APIs y deployment guide.'
+  agent: francisco___senior_backend_developer_y_product_manager
+  context:
+  - sprint_planning___code_analysis_and_architecture_assessment
+generate_react_native_core_app_structure:
+  description: 'Analizar el código actual de FashionMatch AI (GitHub: https://github.com/carlosmartin2012/FasionMatchAI)
+    y generar la estructura completa de una app React Native con TypeScript. Incluir:
+    1) Setup inicial con todas las dependencias necesarias (React Navigation, Zustand,
+    React Native Paper, etc.), 2) Estructura de carpetas escalable (screens, components,
+    services, utils), 3) Configuración de navegación principal, 4) Sistema de gestión
+    de estado global, 5) Configuración de tema y estilos responsivos, 6) Setup de
+    autenticación con Supabase, 7) Configuración básica para iOS/Android.'
+  expected_output: 'Código React Native completo y funcional con: package.json con
+    todas las dependencias, estructura de carpetas organizadas, archivos de configuración
+    (metro.config.js, babel.config.js), navegación principal configurada, estado global
+    implementado, tema responsive, integración básica con Supabase, y archivos de
+    configuración para iOS/Android listos para development.'
+  agent: luis___senior_react_native_code_generator
+  context:
+  - sprint_planning___code_analysis_and_architecture_assessment
+generate_supabase_backend_configuration:
+  description: 'Crear toda la configuración backend de Supabase para FashionMatch
+    AI. Incluir: 1) Schema completo de base de datos (usuarios, prendas, armarios,
+    suscripciones, daily_picks), 2) Row Level Security policies, 3) Edge Functions
+    para APIs críticas, 4) Configuración de autenticación con providers sociales,
+    5) Integración con Stripe para suscripciones, 6) APIs para retailers (Zara, H&M),
+    7) Sistema de storage para imágenes, 8) Triggers y functions para Factor Altura,
+    9) Configuración de realtime subscriptions.'
+  expected_output: 'Configuración completa de Supabase con: scripts SQL para crear
+    todas las tablas y relaciones, policies de seguridad implementadas, Edge Functions
+    desarrolladas, configuración de auth providers, integración completa con Stripe,
+    APIs funcionales para retailers, storage configurado, sistema Factor Altura operativo,
+    y documentación de endpoints.'
+  agent: jose___backend_infrastructure_code_architect
+  context:
+  - sprint_planning___code_analysis_and_architecture_assessment
+mobile_app_development___react_native_migration_and_core_features:
+  description: "**WORKSTREAM MOBILE - MIGRACION A REACT NATIVE**. Migrar la implementacion
+    React web actual a React Native iOS/Android y desarrollar features core del MVP.
+    **EPICS**: 1) Setup proyecto React Native con arquitectura escalable, 2) Migracion
+    de componentes existentes: navegacion, armario digital, modal sistema, 3) Implementar
+    autenticacion y onboarding mobile-first, 4) Desarrollo pantallas core: armario
+    categorizado, subida fotos, Daily Picks premium, 5) Chat conversacional con Gemini
+    API optimizado para mobile, 6) Sistema de suscripcion Gold con paywall nativo,
+    7) Integracion con backend APIs, 8) Performance optimization y testing en dispositivos,
+    9) App Store/Google Play preparation."
+  expected_output: 'App React Native completamente funcional para iOS/Android con:
+    todas las features del MVP implementadas, navegacion fluida optimizada para mobile,
+    integracion completa con backend, paywall de suscripcion funcionando, chat IA
+    responsive, performance optimizada, y apps listas para distribucion en stores.'
+  agent: jose_antonio___tech_lead_y_react_native_developer
+  context:
+  - sprint_planning___code_analysis_and_architecture_assessment
+  - backend_infrastructure___supabase_setup_and_retailers_api_integration
+generate_mobile_ui_components_and_screens:
+  description: 'Generar todos los componentes de UI y pantallas móviles específicas
+    de FashionMatch AI. Incluir: 1) Pantallas de onboarding y autenticación optimizadas
+    para móvil, 2) Armario digital con categorización visual, 3) Modal sistema para
+    subir fotos de prendas, 4) Pantalla Daily Picks con interfaz premium, 5) Chat
+    conversacional con Gemini API, 6) Paywall nativo para suscripción Gold, 7) Sistema
+    de navegación por tabs, 8) Componentes reutilizables (cards, buttons, inputs),
+    9) Animaciones y gestures móviles.'
+  expected_output: 'Suite completa de componentes UI móviles con: pantallas de auth
+    responsive, armario digital interactivo, modal de fotos funcional, Daily Picks
+    premium interface, chat IA fluido, paywall nativo optimizado, navegación móvil
+    intuitiva, librería de componentes reutilizables, y animaciones smooth para UX
+    excepcional.'
+  agent: luis___senior_react_native_code_generator
+  context:
+  - generate_react_native_core_app_structure
+generate_ai_integration_and_factor_altura_system:
+  description: 'Implementar toda la integración con APIs de IA y el sistema Factor
+    Altura. Incluir: 1) Edge Functions para integración optimizada con Gemini API,
+    2) Algoritmos de matching Factor Altura entre usuarios similares, 3) Sistema de
+    reconocimiento automático de prendas, 4) APIs para Daily Picks predictivos basados
+    en clima/calendario, 5) Chat estilista con context awareness y memoria, 6) Computer
+    vision para análisis de materiales y colores, 7) Algoritmos de embeddings para
+    matching de outfits, 8) Sistema de cost optimization para APIs IA, 9) Performance
+    monitoring específico para IA.'
+  expected_output: 'Sistema de IA completo con: Gemini API integrado y optimizado,
+    Factor Altura algoritmo funcional, reconocimiento de prendas automatizado, Daily
+    Picks predictivos operativos, chat con memoria contextual, computer vision implementado,
+    matching de outfits inteligente, cost optimization activo, y monitoring de IA
+    configurado.'
+  agent: jose___backend_infrastructure_code_architect
+  context:
+  - generate_supabase_backend_configuration
+ai_systems_development___factor_altura_and_smart_recommendations:
+  description: '**WORKSTREAM IA - FACTOR ALTURA Y RECOMENDACIONES AVANZADAS**. Desarrollar
+    e implementar sistemas de IA avanzados que diferencien FashionMatch AI de competidores.
+    **EPICS**: 1) Optimizacion integracion Gemini API para reconocimiento automatico
+    de prendas, 2) Desarrollo algoritmos "Factor Altura" para matching entre usuarios
+    de similar estatura, 3) Sistema de recomendaciones predictivo para Daily Picks
+    basado en clima y calendario, 4) Mejora del chat estilista con context awareness
+    y memoria conversacional, 5) Computer vision para analisis automatico de materiales
+    y colores, 6) Algoritmos de deteccion de wear frequency decay para rotacion proactiva,
+    7) Sistema de embeddings para matching de outfits, 8) Cost optimization de APIs
+    y performance monitoring.'
+  expected_output: 'Suite completa de sistemas IA funcionando: Factor Altura operativo
+    con matching preciso, Daily Picks predictivos y contextuales, chat estilista con
+    memoria y context, reconocimiento automatico de prendas optimizado, algoritmos
+    de recomendacion personalizados, y sistema de monitoreo de costos IA implementado.'
+  agent: millan___ux_ui_designer_y_ai_integration_specialist
+  context:
+  - backend_infrastructure___supabase_setup_and_retailers_api_integration
+  - generate_ai_integration_and_factor_altura_system
+generate_complete_ci_cd_pipeline_and_devops_setup:
+  description: 'Crear pipeline completo de CI/CD y configuración DevOps para FashionMatch
+    AI. Incluir: 1) GitHub Actions workflows para React Native (build, test, deploy),
+    2) Configuración de ambientes (dev, staging, prod), 3) Scripts de deployment automático,
+    4) App Store Connect y Google Play Console automation, 5) Docker containers para
+    servicios backend, 6) Infrastructure as Code para cloud resources, 7) Monitoring
+    y logging setup, 8) Security scanning y vulnerability checks, 9) Performance testing
+    automation, 10) Backup y disaster recovery scripts.'
+  expected_output: 'Sistema DevOps completo con: GitHub Actions workflows configurados,
+    scripts de deployment automatizados, configuración multi-ambiente, automation
+    para app stores, containers optimizados, IaC implementado, sistema de monitoring
+    operativo, security scanning integrado, performance testing configurado, y procedures
+    de backup/recovery documentados.'
+  agent: gonzalo___devops_and_automation_code_generator
+  context:
+  - generate_react_native_core_app_structure
+  - generate_supabase_backend_configuration
+  - generate_mobile_ui_components_and_screens
+  - generate_ai_integration_and_factor_altura_system
+production_deployment_and_scalability_setup:
+  description: "**WORKSTREAM DEVOPS - DEPLOYMENT Y ESCALABILIDAD**. Preparar infraestructura
+    de produccion para MVP launch y escalado a 2,500+ usuarios. **EPICS**: 1) Setup
+    CI/CD pipeline automatizado para React Native y backend, 2) Configuracion de entornos:
+    development, staging, production, 3) Infrastructure as Code con monitoring y alertas,
+    4) App Store y Google Play setup y submission process, 5) Performance testing
+    y load testing para 2,500+ usuarios concurrentes, 6) Backup strategies y disaster
+    recovery procedures, 7) Security audit y penetration testing, 8) Analytics implementation
+    para tracking de usuario y business metrics, 9) A/B testing framework para growth
+    experiments, 10) Documentation completa para maintenance y operations."
+  expected_output: 'Infraestructura de produccion completamente operativa: CI/CD pipeline
+    funcionando, apps publicadas en stores, sistema de monitoring robusto, performance
+    validada para 2,500+ usuarios, security auditada, analytics configurado, y documentacion
+    completa para operaciones. Sistema listo para MVP launch y escalado rapido.'
+  agent: emilio___pmo_y_technical_program_manager
+  context:
+  - mobile_app_development___react_native_migration_and_core_features
+  - backend_infrastructure___supabase_setup_and_retailers_api_integration
+  - ai_systems_development___factor_altura_and_smart_recommendations
+  - generate_complete_ci_cd_pipeline_and_devops_setup
