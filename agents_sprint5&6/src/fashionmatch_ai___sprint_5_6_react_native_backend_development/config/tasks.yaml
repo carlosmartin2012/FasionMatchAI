@@ -1,0 +1,82 @@
+---
+generate_react_native_core_app_structure:
+  description: 'Generar la estructura completa de la aplicación React Native de FashionMatch
+    AI con código ejecutable. Incluir: 1) Configuración inicial del proyecto con TypeScript,
+    2) Estructura de carpetas profesional (src/, components/, screens/, navigation/,
+    services/, types/), 3) Configuración de React Navigation v6, 4) Setup de Redux
+    Toolkit para state management, 5) Configuración de react-native-config para variables
+    de entorno, 6) Scripts de package.json optimizados, 7) Configuración de ESLint
+    y Prettier, 8) Metro config optimizado, 9) Android y iOS build configs, 10) Documentación
+    de setup e instalación.'
+  expected_output: Código fuente completo de la estructura base de React Native con
+    todos los archivos de configuración, navegación, state management y documentación.
+    Include package.json, tsconfig.json, metro.config.js, y todos los archivos necesarios
+    para compilar y ejecutar la app en iOS y Android.
+  agent: luis___senior_react_native_developer
+generate_supabase_backend_configuration:
+  description: 'Implementar la configuración completa del backend Supabase para FashionMatch
+    AI con código ejecutable. Incluir: 1) Scripts SQL para crear todas las tablas
+    (users, garments, subscriptions, recommendations, user_interactions, height_matches),
+    2) Row Level Security (RLS) policies, 3) Database functions para Factor Altura
+    matching, 4) Edge Functions para integración con Gemini API, 5) Edge Functions
+    para Daily Picks predictivos, 6) Sistema de autenticación con email y OAuth, 7)
+    Storage buckets para imágenes de prendas, 8) Triggers para análisis automático
+    de imágenes, 9) Índices optimizados para performance, 10) Configuración de variables
+    de entorno y secrets.'
+  expected_output: Scripts SQL completos ejecutables, código TypeScript de Edge Functions,
+    configuración de autenticación, storage y policies. Todos los archivos .sql y
+    .ts listos para deploy en Supabase con documentación de configuración.
+  agent: jose___backend_supabase_expert
+generate_mobile_ui_components_and_screens:
+  description: 'Crear todos los componentes móviles y screens de FashionMatch AI con
+    código React Native ejecutable. Incluir: 1) Componentes UI reutilizables (Button,
+    Input, Card, ImagePicker, LoadingSpinner), 2) Screens principales (SplashScreen,
+    LoginScreen, RegisterScreen, HomeScreen, WardrobeScreen, PhotoCaptureScreen, DailyPicksScreen,
+    ProfileScreen), 3) Componentes específicos de fashion (GarmentCard, OutfitCard,
+    StylePicker, HeightSelector), 4) Navegación entre pantallas, 5) Gestión de imágenes
+    con react-native-image-picker, 6) Animaciones con react-native-reanimated, 7)
+    Styled Components o StyleSheet optimizados, 8) Responsive design para diferentes
+    tamaños de pantalla, 9) Accesibilidad (accessibility props), 10) Integración básica
+    con Supabase client.'
+  expected_output: Código completo de todos los componentes React Native y screens
+    con navegación funcional, estilos móviles profesionales, gestión de imágenes,
+    animaciones y conectividad básica con backend. Todos los archivos .tsx listos
+    para compilar.
+  agent: luis___senior_react_native_developer
+  context:
+  - generate_react_native_core_app_structure
+implement_ai_factor_altura_system:
+  description: 'Desarrollar el sistema completo IA Factor Altura con integración a
+    Gemini API para FashionMatch AI con código ejecutable. Incluir: 1) Edge Function
+    para reconocimiento automático de prendas con Gemini Vision API, 2) Algoritmo
+    de matching por altura entre usuarios similares, 3) Sistema de embeddings para
+    análisis de outfits, 4) Edge Function para Daily Picks predictivos basados en
+    clima/calendario, 5) Chat estilista con memoria conversacional usando Gemini,
+    6) Computer vision para análisis automático de materiales y colores, 7) Sistema
+    de cost optimization para APIs de IA, 8) Funciones de performance monitoring específico
+    para IA, 9) Cache strategies para reducir llamadas a APIs, 10) Error handling
+    y fallbacks para servicios IA.'
+  expected_output: Código TypeScript completo de Edge Functions con integración Gemini
+    API, algoritmos de matching, sistema de recomendaciones IA, chat estilista, análisis
+    de imágenes y monitoring. Todos los archivos .ts y .sql ejecutables con documentación
+    de APIs y configuración.
+  agent: jose___backend_supabase_expert
+  context:
+  - generate_supabase_backend_configuration
+integrate_mobile_app_with_backend:
+  description: 'Conectar completamente la aplicación React Native con el backend Supabase
+    y sistema IA. Incluir: 1) Integración de autenticación entre app móvil y Supabase,
+    2) Conexión de screens con APIs backend (armario, daily picks, chat estilista),
+    3) Implementación de subida de imágenes desde móvil a storage, 4) Conectar Factor
+    Altura matching con UI móvil, 5) Integrar sistema de suscripciones con paywall
+    nativo, 6) Configurar notificaciones push, 7) Testing end-to-end de flujos críticos,
+    8) Optimización de performance móvil-backend, 9) Error handling y offline capabilities,
+    10) Documentación de integración y deployment.'
+  expected_output: 'Aplicación móvil completamente integrada con backend funcionando:
+    autenticación operativa, todas las screens conectadas a APIs, subida de imágenes
+    funcional, Factor Altura activo, suscripciones implementadas, notificaciones configuradas,
+    y sistema end-to-end probado y documentado.'
+  agent: luis___senior_react_native_developer
+  context:
+  - generate_mobile_ui_components_and_screens
+  - implement_ai_factor_altura_system
